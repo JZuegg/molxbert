@@ -1,0 +1,1 @@
+export PYTHONPATH=/clusterdata/uqjzuegg/scr/zpyCode/03_Apps/zChemBERT/molbert

@@ -1,0 +1,1 @@
+$env:pythonpath = $env:pythonpath+';D:\Code\zpyCode\03_Apps\zChemBERT\molbert'
