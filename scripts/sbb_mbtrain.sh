@@ -1,17 +1,20 @@
 #!/bin/bash
-#SBATCH --job-name=MBerTorch_TR
+#SBATCH --job-name=mxb_train
+#SBATCH --partition=gpu_cua
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=50000
-#SBATCH --partition=gpu
-#SBATCH --gres=gpu:tesla:1
+#SBATCH --cpus-per-task=16
+#SBATCH --gres=gpu:h100:1
+#SBATCH --mem=60G
+#SBATCH --time=24:00:00
+#SBATCH --account=a_blaskovich
 #SBATCH --output log/molbert_train_out.txt
 #SBATCH --error log/molbert_train_error.txt
 
-# Initialise Conda Env
-module load anaconda
-source /opt/ohpc/pub/apps/anaconda3/etc/profile.d/conda.sh
+# Initialise Conda Env (Bunya)
+export PYTHONPATH=/home/uqjzuegg/scratch/zpyCode/01_Library/zLib
+module load anaconda3
+source $EBROOTANACONDA3/etc/profile.d/conda.sh
 conda activate pytorch2
 
 # Initialise MolBert 

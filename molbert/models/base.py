@@ -6,12 +6,12 @@ from typing import Dict, Tuple
 import pytorch_lightning as pl
 from pytorch_lightning.core.saving import save_hparams_to_yaml
 from pytorch_lightning.callbacks import Callback
-
 import torch
 from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau, CosineAnnealingWarmRestarts, StepLR
 from torch.optim import AdamW
 from torch.utils.data.dataloader import DataLoader
+import torchmetrics
 from transformers import (
 #   AdamW,
     get_linear_schedule_with_warmup,
@@ -166,6 +166,9 @@ class MolbertModel(pl.LightningModule):
             raise ValueError('You did not specify any tasks... exiting.')
         self.model = FlexibleBertModel(self.config, nn.ModuleList(self.tasks))
 
+        # self.accuracy = torchmetrics.classification.Accuracy(task="multiclass", 
+        #                                                      num_classes=self.classes)
+
     def forward(self, batch_inputs: Dict[str, torch.Tensor]) -> Dict[str, torch.Tensor]:
         """
         Performs one forward step for the model.
@@ -200,6 +203,7 @@ class MolbertModel(pl.LightningModule):
         losses = self.evaluate_losses(batch_labels, y_hat)
         loss = torch.sum(torch.stack(list(losses.values())))
         tensorboard_logs = {f'{mode}_loss': loss, **losses}
+        self.log(f'{mode}_loss', loss, on_step=True, on_epoch=True)
         return {'loss': loss, f'{mode}_loss': loss, 'log': tensorboard_logs}
 
     def training_step(self, batch: MolbertBatchType, batch_idx: int) -> Dict[str, torch.Tensor]:
@@ -209,6 +213,7 @@ class MolbertModel(pl.LightningModule):
         # OPTIONAL
         avg_loss = torch.stack([x['train_loss'] for x in outputs]).mean()
         tensorboard_logs = {'train_loss': avg_loss}
+        self.log_dict(tensorboard_logs, on_step=True, on_epoch=True)
         return {'log': tensorboard_logs}
 
     def validation_step(self, batch: MolbertBatchType, batch_idx: int) -> Dict[str, torch.Tensor]:
@@ -223,6 +228,7 @@ class MolbertModel(pl.LightningModule):
 
         epoch_average = torch.stack(self.validation_step_outputs).mean()
         tensorboard_logs = {'valid_loss': epoch_average}
+        self.log_dict(tensorboard_logs)
         return {'log': tensorboard_logs}
 
     def test_step(self, batch: MolbertBatchType, batch_idx: int) -> Dict[str, torch.Tensor]:
@@ -232,6 +238,7 @@ class MolbertModel(pl.LightningModule):
         # OPTIONAL
         avg_loss = torch.stack([x['test_loss'] for x in outputs]).mean()
         tensorboard_logs = {'test_loss': avg_loss}
+        self.log_dict(tensorboard_logs, on_step=True, on_epoch=True)
         return {'log': tensorboard_logs}
 
     def evaluate_losses(self, batch_labels, batch_predictions):

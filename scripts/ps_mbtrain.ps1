@@ -1,0 +1,13 @@
+python molbert/apps/smiles.py `
+    --train_file D:\Code\molxbert\data\gucamol\guacamol_v1_testtrain.smiles `
+    --valid_file D:\Code\molxbert\data\gucamol\guacamol_v1_testvalid.smiles `
+    --test_file D:\Code\molxbert\data\gucamol\guacamol_v1_test.smiles `
+    --max_seq_length 128 `
+    --batch_size 32 `
+    --masked_lm 1 `
+    --num_physchem_properties 200 `
+    --is_same_smiles 0 `
+    --permute 1 `
+    --max_epochs 10  `
+    --num_workers 0 `
+    --val_check_interval 1
