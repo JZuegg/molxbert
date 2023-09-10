@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
 #SBATCH --gres=gpu:h100:1
-#SBATCH --mem=60G
+#SBATCH --mem=80G
 #SBATCH --time=24:00:00
 #SBATCH --account=a_blaskovich
 #SBATCH --output logs/molbert_train_out.txt
