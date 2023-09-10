@@ -15,7 +15,7 @@ source /opt/ohpc/pub/apps/anaconda3/etc/profile.d/conda.sh
 conda activate pytorch2
 
 # Initialise MolBert 
-source /clusterdata/uqjzuegg/scr/zpyCode/03_Apps/zChemBERT/molbert/scripts/init_molbert.sh
+source /clusterdata/uqjzuegg/scr/Calc/pyMolxBert/molxbert/scripts/initw_molbert.sh
 
 srun python molbert/apps/smiles.py \
     --train_file /clusterdata/uqjzuegg/scr/Data/Guacamol/guacamol_v1_train.smiles \
