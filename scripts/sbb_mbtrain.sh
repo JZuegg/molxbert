@@ -18,7 +18,7 @@ source $EBROOTANACONDA3/etc/profile.d/conda.sh
 conda activate pytorch2
 
 # Initialise MolBert 
-source /home/uqjzuegg/BlaskLab_Micro/Calc/pyMolxBert/molxbert/scripts/init_molbert.sh
+source /home/uqjzuegg/BlaskLab_Micro/Calc/pyMolxBert/molxbert/scripts/initb_molbert.sh
 
 srun python molbert/apps/smiles.py \
     --train_file /home/uqjzuegg/BlaskLab_Micro/databases/gucamol/guacamol_v1_train.smiles \
