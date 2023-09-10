@@ -1,0 +1,1 @@
+export PYTHONPATH=/home/uqjzuegg/BlaskLab_Micro/Calc/pyMolxBert/molxbert/molbert

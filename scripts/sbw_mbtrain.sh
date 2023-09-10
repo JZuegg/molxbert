@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --gres=gpu:tesla:1
-#SBATCH --mem=60G
+#SBATCH --mem=80G
 #SBATCH --output log/molbert_train_out.txt
 #SBATCH --error log/molbert_train_error.txt
 
@@ -21,11 +21,11 @@ srun python molbert/apps/smiles.py \
     --train_file /clusterdata/uqjzuegg/scr/Data/Guacamol/guacamol_v1_train.smiles \
     --valid_file /clusterdata/uqjzuegg/scr/Data/Guacamol/guacamol_v1_valid.smiles \
     --max_seq_length 128 \
-    --batch_size 16 \
+    --batch_size 32 \
     --masked_lm 1 \
     --num_physchem_properties 200 \
     --is_same_smiles 0 \
     --permute 1 \
     --max_epochs 20 \
-    --num_workers 4 \
+    --num_workers 16 \
     --val_check_interval 1

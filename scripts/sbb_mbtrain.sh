@@ -18,11 +18,11 @@ source $EBROOTANACONDA3/etc/profile.d/conda.sh
 conda activate pytorch2
 
 # Initialise MolBert 
-source /clusterdata/uqjzuegg/scr/zpyCode/03_Apps/zChemBERT/molbert/scripts/init_molbert.sh
+source /home/uqjzuegg/BlaskLab_Micro/Calc/pyMolxBert/molxbert/scripts/init_molbert.sh
 
 srun python molbert/apps/smiles.py \
-    --train_file /clusterdata/uqjzuegg/scr/Data/Guacamol/guacamol_v1_train.smiles \
-    --valid_file /clusterdata/uqjzuegg/scr/Data/Guacamol/guacamol_v1_valid.smiles \
+    --train_file /home/uqjzuegg/BlaskLab_Micro/databases/gucamol/guacamol_v1_train.smiles \
+    --valid_file /home/uqjzuegg/BlaskLab_Micro/databases/gucamol/guacamol_v1_valid.smiles \
     --max_seq_length 128 \
     --batch_size 32 \
     --masked_lm 1 \
