@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=mxb_train
-#SBATCH --partition=gpu_cua
+#SBATCH --partition=gpu_cuda
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
