@@ -1,1 +1,1 @@
-export PYTHONPATH=/clusterdata/uqjzuegg/scr/Calc/pyMolxBert/molxbert/molbert
+export PYTHONPATH=/clusterdata/uqjzuegg/scr/Calc/pyMolxBert/molxbert
