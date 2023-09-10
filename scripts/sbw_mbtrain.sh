@@ -3,11 +3,11 @@
 #SBATCH --partition=gpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=32
 #SBATCH --gres=gpu:tesla:1
 #SBATCH --mem=80G
-#SBATCH --output log/molbert_train_out.txt
-#SBATCH --error log/molbert_train_error.txt
+#SBATCH --output logs/molbert_train_out.txt
+#SBATCH --error logs/molbert_train_error.txt
 
 # Initialise Conda Env (Wiener)
 module load anaconda
@@ -27,5 +27,5 @@ srun python molbert/apps/smiles.py \
     --is_same_smiles 0 \
     --permute 1 \
     --max_epochs 20 \
-    --num_workers 16 \
+    --num_workers 32 \
     --val_check_interval 1
